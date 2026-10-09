@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /cgi-bin/
+Disallow: /node_modules/
+
+Sitemap: https://nelsonsplace.co.mz/sitemap.xml

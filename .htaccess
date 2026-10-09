@@ -1,0 +1,100 @@
+# ============================================
+# SEGURANÇA - Nelson's Place Website
+# ============================================
+
+<IfModule mod_headers.c>
+    # Prevenir clickjacking - impede que o site seja carregado em iframes
+    Header always set X-Frame-Options "SAMEORIGIN"
+
+    # Proteção contra XSS (Cross-Site Scripting)
+    Header always set X-XSS-Protection "1; mode=block"
+
+    # Prevenir MIME type sniffing
+    Header always set X-Content-Type-Options "nosniff"
+
+    # Referrer Policy - controla informações enviadas ao navegar
+    Header always set Referrer-Policy "strict-origin-when-cross-origin"
+
+    # Permissions Policy - restringe recursos do navegador
+    Header always set Permissions-Policy "geolocation=(), microphone=(), camera=()"
+</IfModule>
+
+# ============================================
+# PROTEÇÃO DE DIRETÓRIOS
+# ============================================
+
+# Desativar listagem de diretórios
+Options -Indexes
+
+# Proteger arquivos sensíveis
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Proteger arquivos de configuração
+<FilesMatch "(^#.*#|\.(bak|config|dist|fla|inc|ini|log|psd|sh|sql|sw[op])|~)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# ============================================
+# PROTEÇÃO CONTRA EXECUÇÃO DE SCRIPTS EM UPLOADS
+# ============================================
+
+# Nota: protecção de directórios de imagens deve ser
+# configurada directamente no Plesk ou no httpd.conf
+
+# ============================================
+# FORÇAR HTTPS (descomente quando tiver SSL)
+# ============================================
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# ============================================
+# CACHE DE ARQUIVOS ESTÁTICOS
+# ============================================
+
+<IfModule mod_expires.c>
+    ExpiresActive On
+    
+    # Imagens - cache de 1 mês
+    ExpiresByType image/jpeg "access plus 1 month"
+    ExpiresByType image/png "access plus 1 month"
+    ExpiresByType image/gif "access plus 1 month"
+    ExpiresByType image/webp "access plus 1 month"
+    ExpiresByType image/svg+xml "access plus 1 month"
+    ExpiresByType image/x-icon "access plus 1 year"
+    
+    # CSS e JavaScript - cache de 1 semana
+    ExpiresByType text/css "access plus 1 week"
+    ExpiresByType application/javascript "access plus 1 week"
+    
+    # Fontes - cache de 1 mês
+    ExpiresByType font/woff2 "access plus 1 month"
+    ExpiresByType font/woff "access plus 1 month"
+    ExpiresByType font/ttf "access plus 1 month"
+    ExpiresByType font/otf "access plus 1 month"
+</IfModule>
+
+# ============================================
+# COMPRESSÃO GZIP
+# ============================================
+
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html
+    AddOutputFilterByType DEFLATE text/css
+    AddOutputFilterByType DEFLATE application/javascript
+    AddOutputFilterByType DEFLATE application/json
+    AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ============================================
+# PROTEÇÃO CONTRA HOTLINKING DE IMAGENS
+# (descomente e altere o domínio quando publicar)
+# ============================================
+# RewriteEngine On
+# RewriteCond %{HTTP_REFERER} !^$
+# RewriteCond %{HTTP_REFERER} !^https?://(www\.)?seudominio\.com [NC]
+# RewriteRule \.(jpg|jpeg|png|gif|webp)$ - [F,NC]

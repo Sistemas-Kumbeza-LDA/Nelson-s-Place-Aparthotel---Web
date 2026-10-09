@@ -1,0 +1,219 @@
+/* Custom fixes for Nelson's Place */
+
+/* Fix scroll and empty space issues */
+html, body {
+    height: auto !important;
+    min-height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto !important;
+}
+
+#wrapper {
+    min-height: auto !important;
+    height: auto !important;
+    overflow: visible !important;
+    position: relative;
+}
+
+/* Ensure footer is always at bottom */
+footer.section-dark {
+    position: relative;
+    z-index: 10;
+    margin-top: 0;
+}
+
+/* Fix vertical-center height on mobile */
+@media (max-width: 992px) {
+    /* Keep hero section visible on mobile */
+    #section-hero .vertical-center {
+        min-height: 100vh !important;
+        height: 100vh !important;
+    }
+    
+    /* Hero content positioning and centering on mobile */
+    #section-hero .abs.abs-centered {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 90%;
+        text-align: center;
+    }
+    
+    #section-hero .abs.abs-centered .row {
+        justify-content: center !important;
+        text-align: center;
+    }
+    
+    #section-hero .abs.abs-centered h1,
+    #section-hero .abs.abs-centered h4 {
+        text-align: center;
+    }
+    
+    #section-hero .abs.abs-centered .btn-main {
+        display: inline-block;
+        margin: 5px;
+    }
+}
+
+/* WhatsApp floating button */
+.whatsapp-float {
+    position: fixed;
+    width: 60px;
+    height: 60px;
+    bottom: 30px;
+    right: 30px;
+    background-color: #25D366;
+    color: #fff;
+    border-radius: 50%;
+    text-align: center;
+    font-size: 30px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.whatsapp-float:hover {
+    background-color: #128C7E;
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* Video Popup Fix */
+.popup-youtube {
+    cursor: pointer;
+}
+
+.popup-youtube * {
+    pointer-events: none;
+}
+
+/* Fix rooms descriptions visibility on mobile and small tablets */
+@media (max-width: 992px) {
+    /* Override p-sm-relative to show content instead of hiding it */
+    .p-sm-relative {
+        position: relative !important;
+        display: block !important;
+        bottom: auto !important;
+    }
+    
+    /* Ensure rooms card content is visible on mobile */
+    #section-rooms .bg-dark-2 {
+        min-height: auto !important;
+        height: auto !important;
+    }
+    
+    /* Remove h-100 constraint on mobile to allow natural height */
+    #section-rooms .bg-dark-2.h-100 {
+        height: auto !important;
+    }
+    
+    #section-rooms .bg-dark-2 .abs.p-sm-relative {
+        position: relative !important;
+        bottom: auto !important;
+        padding-top: 20px !important;
+        padding-bottom: 40px !important;
+    }
+    
+    /* Adjust padding for mobile */
+    #section-rooms .bg-dark-2 h3 {
+        padding-bottom: 20px !important;
+    }
+    
+    /* Ensure text and prices are visible */
+    #section-rooms .bg-dark-2 p,
+    #section-rooms .bg-dark-2 strong,
+    #section-rooms .bg-dark-2 small {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+    }
+}
+
+/* Additional fixes for small tablets (768px - 992px) */
+@media (min-width: 768px) and (max-width: 992px) {
+    #section-rooms .bg-dark-2 {
+        min-height: auto !important;
+        height: auto !important;
+    }
+    
+    #section-rooms .bg-dark-2.h-100 {
+        height: auto !important;
+    }
+    
+    #section-rooms .bg-dark-2 .abs.p-sm-relative {
+        position: relative !important;
+        bottom: auto !important;
+        padding-top: 20px !important;
+        padding-bottom: 40px !important;
+    }
+}
+
+/* Language Switcher Button */
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    background-color: #fff;
+    border: 1px solid var(--primary-color, #B07E50);
+    border-radius: 8px;
+    padding: 2px 6px;
+    margin-left: 15px;
+    gap: 6px;
+}
+
+.lang-btn {
+    background: none;
+    border: none;
+    color: var(--primary-color, #B07E50);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 2px 5px;
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.lang-btn:hover {
+    color: #8a5f35;
+}
+
+.lang-btn.active {
+    background-color: var(--primary-color, #B07E50);
+    color: #fff;
+}
+
+.lang-divider {
+    color: var(--primary-color, #B07E50);
+    font-weight: 300;
+}
+
+/* Mobile adjustments for language switcher */
+@media (max-width: 992px) {
+    .lang-switcher {
+        position: absolute;
+        right: 60px;
+        top: 50%;
+        transform: translateY(-50%);
+        margin-left: 0;
+        padding: 4px 10px;
+    }
+    
+    .lang-btn {
+        font-size: 12px;
+        padding: 2px 6px;
+    }
+}
+
+/* Director Geral image responsive sizing */
+.director-img {
+    width: 70%;
+}
+
+@media (max-width: 768px) {
+    .director-img {
+        width: 50%;
+    }
+}
